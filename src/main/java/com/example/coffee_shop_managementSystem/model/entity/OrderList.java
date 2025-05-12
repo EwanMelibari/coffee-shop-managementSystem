@@ -17,6 +17,9 @@ public class OrderList {
         this.quantity = quantity;
     }
 
+    public OrderList() {
+    }
+
     public Integer getOrderListId() {
         return orderListId;
     }
