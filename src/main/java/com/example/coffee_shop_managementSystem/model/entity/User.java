@@ -2,18 +2,37 @@ package com.example.coffee_shop_managementSystem.model.entity;
 
 import com.example.coffee_shop_managementSystem.model.entity.enums.PersonRole;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "users")
 public class User {
-    
+    @Id
     private Integer id;
+
+    @Column(name = "username", nullable = false)
     private String username;
-    private Integer password;
+
+   @Column(name = "password", nullable = false)
+    private String password;
+
+   @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
     private PersonRole role;
+
+    @Column(name = "salary", nullable = false)
+    @Max(value = 30000)
+    @Min(value = 5000)
     private Double salary;
     
-    public User(Integer id,String username, Integer password, PersonRole role, Double salary) {
+    public User(Integer id,String username, String password, PersonRole role, Double salary) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -37,11 +56,11 @@ public class User {
         this.username = username;
     }
     
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
     
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     

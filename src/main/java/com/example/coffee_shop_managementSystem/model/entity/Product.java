@@ -2,14 +2,27 @@ package com.example.coffee_shop_managementSystem.model.entity;
 
 import com.example.coffee_shop_managementSystem.model.entity.enums.ProductType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "products")
 public class Product {
     
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY) 
     private Integer productId;
+    
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "price", nullable = false)
     private Double price;
+
+    @Column(name = "type", nullable = false)
     private ProductType type;
 
     public Product(Integer productId, String name, Double price, ProductType type) {
