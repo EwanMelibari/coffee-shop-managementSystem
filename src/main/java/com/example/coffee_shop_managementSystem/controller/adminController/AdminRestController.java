@@ -33,4 +33,8 @@ public String getAllProducts() {
     return "getAllProducts";
 }
 
+@GetMapping("/welcome")
+public String welcome() {
+    return "Welcome to the admin page!";}
+
 }
