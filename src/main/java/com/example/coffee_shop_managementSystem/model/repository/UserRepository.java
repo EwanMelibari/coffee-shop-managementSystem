@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.coffee_shop_managementSystem.model.entity.User;
+import com.example.coffee_shop_managementSystem.model.entity.enums.PersonRole;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
@@ -18,6 +19,8 @@ List<User> findByUsername(String username);
 List<User> findByUsernameAndPassword(String username, String password);
 
 
+@Query("SELECT u FROM User u WHERE u.role = 'CASHIER'")
+List<User> findByRole(PersonRole role);
 
 
 

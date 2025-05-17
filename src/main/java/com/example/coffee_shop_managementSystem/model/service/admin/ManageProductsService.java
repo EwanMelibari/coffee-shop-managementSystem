@@ -14,23 +14,31 @@ public class ManageProductsService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void saveProduct(Product product) {
-        productRepository.save(product);
+    public Product saveProduct(Product product) {
+       return productRepository.save(product);
     }
 
     public void deleteProduct(Integer id) {
-        productRepository.deleteById(id);
+    if (!productRepository.existsById(id)) {
+        throw new RuntimeException("Product not found with id: " + id);
     }
+    productRepository.deleteById(id);
+}
 
     public Product getProductById(Integer id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public void updateProduct(Product product) {
-       if(productRepository.existsById(product.getProductId())){
-           productRepository.save(product);
-       }
-    }
+    public Product updateProduct(Integer id, Product updatedProduct) {
+    Product existingProduct = productRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    
+    existingProduct.setName(updatedProduct.getName());
+    existingProduct.setPrice(updatedProduct.getPrice());
+    existingProduct.setType(updatedProduct.getType());
+    
+    return productRepository.save(existingProduct);
+}
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
