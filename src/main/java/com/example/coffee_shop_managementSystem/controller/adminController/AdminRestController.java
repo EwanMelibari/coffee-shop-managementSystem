@@ -44,10 +44,10 @@ public List<User> getAllEmployees() {
         return manageEmployeeService.saveEmployee(user);
     }
 
-@PutMapping("/employees/update/{id}")
-public User updateEmployee(@PathVariable Integer id, @RequestBody User user) {
-    return manageEmployeeService.updateEmployee(id, user);
-}
+@DeleteMapping("/employees/delete/{id}")
+    public void deleteEmployee(@PathVariable Integer id) {
+        manageEmployeeService.deleteEmployee(id);
+    }
 
 @GetMapping("/products")
 public List<Product> getAllProducts() {
@@ -71,6 +71,10 @@ public void deleteProduct(@PathVariable Integer id) {
     manageProductService.deleteProduct(id);
 }
 
+  @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable Integer id) {
+        return manageProductService.getProductById(id);
+    }
 
 
 }

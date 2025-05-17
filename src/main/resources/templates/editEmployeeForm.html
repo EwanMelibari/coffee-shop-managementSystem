@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:action="@{/REST/admin/employees/update/{id}(id=${employee.id})}" method="put">
+    <input th:value="${employee.username}" name="username">
+    <input th:value="${employee.role}" name="role">
+    <input th:value="${employee.salary}" name="salary">
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

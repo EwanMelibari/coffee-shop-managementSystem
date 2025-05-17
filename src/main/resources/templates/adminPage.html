@@ -10,7 +10,7 @@
         <h1>Employee List</h1>
         
         <!-- زر إضافة موظف -->
-        <a th:href="@{/admin/addEmployee}" class="btn btn-primary mb-3">Add Employees</a>
+        <a th:href="@{/admin/employeesAdd}" class="btn btn-primary mb-3">Add Employees</a>
         
         <!-- جدول عرض الموظفين -->
         <table class="table">
@@ -30,8 +30,8 @@
                     <td th:text="${employee.role}"></td>
                     <td th:text="${employee.salary}"></td>
                     <td>
-                        <a th:href="@{/admin/editEmployee/{id}(id=${employee.id})}" class="btn btn-warning">تعديل</a>
-                        <button th:onclick="'deleteEmployee(' + ${employee.id} + ')'">  </tr>
+                        <a th:href="@{/admin/editEmployee/{id}(id=${employee.id})}" class="btn btn-warning">Update</a>
+  <button class="btn btn-danger" th:onclick="'deleteEmployee(' + ${employee.id} + ')'">Delete</button>                            
             </tbody>
         </table>
     </div>
