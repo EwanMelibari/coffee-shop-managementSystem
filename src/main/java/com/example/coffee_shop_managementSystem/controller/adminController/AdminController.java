@@ -23,22 +23,23 @@ public class AdminController {
     @Autowired
     private ManageProductsService manageProductService;
 
-    // إدارة الموظفين
-    @GetMapping("/employeesAdd")
-    public String showAddEmployeeForm() {
-        return "addEmployeeForm";
-    }
 
-    @PostMapping("/employeesAdd")
-    public String addEmployee(@ModelAttribute User user) {
-        manageEmployeeService.saveEmployee(user);
-        return "redirect:/admin/viewEmployees";
+   @GetMapping("/employeesAdd")
+    public String showAddEmployeeForm(Model model, User user) {
+        model.addAttribute("employee", user);
+        return "addEmployeeForm";
     }
 
     @GetMapping("/viewEmployees")
     public String viewEmployees(Model model) {
         model.addAttribute("employees", manageEmployeeService.getAllEmployees());
         return "adminPage";
+    }
+
+    @PostMapping("/employeesAdd")
+    public String addEmployee(@ModelAttribute("employee") User user) {
+        manageEmployeeService.saveEmployee(user);
+        return "redirect:/admin/viewEmployees";
     }
 
     // إدارة المنتجات
@@ -65,4 +66,11 @@ public class AdminController {
         model.addAttribute("product", manageProductService.getProductById(id));
         return "editProductForm";
     }
+
+    @PostMapping("/updateEmployee/{id}")
+    public String updateEmployee(@PathVariable Integer id, @ModelAttribute User user) {
+        manageEmployeeService.updateEmployee(id, user);
+        return "redirect:/admin/viewEmployees";
+    }
+
 }

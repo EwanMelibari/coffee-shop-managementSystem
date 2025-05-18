@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -14,8 +16,10 @@ import jakarta.validation.constraints.Min;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
-    private Integer id;
+
+   @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // أضف هذه السطر
+    private Integer id; // تعيين قيمة عشوائية للمعرف
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -32,8 +36,7 @@ public class User {
     @Min(value = 5000)
     private Double salary;
     
-    public User(Integer id,String username, String password, PersonRole role, Double salary) {
-        this.id = id;
+    public User(String username, String password, PersonRole role, Double salary) {
         this.username = username;
         this.password = password;
         this.role = role;

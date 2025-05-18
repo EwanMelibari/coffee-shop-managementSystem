@@ -49,6 +49,11 @@ public List<User> getAllEmployees() {
         manageEmployeeService.deleteEmployee(id);
     }
 
+    @PutMapping("/employees/update/{id}")
+    public User updateEmployee(@PathVariable Integer id, @RequestBody User user) {
+        return manageEmployeeService.updateEmployee(id, user);
+    }
+
 @GetMapping("/products")
 public List<Product> getAllProducts() {
     return manageProductService.getAllProducts();

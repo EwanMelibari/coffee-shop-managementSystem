@@ -7,29 +7,14 @@
 </head>
 <body>
 
-<!-- احذف الـ script وأبقِ النموذج كما هو -->
-<form th:action="@{/admin/employeesAdd}" method="post">
-    <input type="text" name="username" placeholder="Employee Name">
-    <input type="text" name="role" placeholder="Role">
-    <input type="number" name="salary" placeholder="Salary">
+
+<form th:action="@{/admin/employeesAdd}" th:object="${employee}" method="post">
+    <input type="text" name="username" th:field="*{username}" placeholder="Username">
+    <input type="text" name="role" th:field="*{role}" placeholder="Role">
+    <input type="number" name="salary" th:field="*{salary}" placeholder="Salary">
+    <input type="password" name="password" th:field="*{password}" placeholder="Password">
     <button type="submit">Submit</button>
 </form>
-<!-- في addEmployeeForm.html -->
-<script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-
-        const response = await fetch('/REST/admin/employees/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) window.location.href = '/admin/viewEmployees';
-    });
-</script>
 
 </body>
 </html>

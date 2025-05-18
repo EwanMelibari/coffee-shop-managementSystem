@@ -9,10 +9,10 @@
     <div class="container mt-5">
         <h1>Employee List</h1>
         
-        <!-- زر إضافة موظف -->
+       
         <a th:href="@{/admin/employeesAdd}" class="btn btn-primary mb-3">Add Employees</a>
         
-        <!-- جدول عرض الموظفين -->
+
         <table class="table">
             <thead>
                 <tr>
@@ -23,30 +23,20 @@
                     <th>procedures</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.username}"></td>
-                    <td th:text="${employee.role}"></td>
-                    <td th:text="${employee.salary}"></td>
-                    <td>
-                        <a th:href="@{/admin/editEmployee/{id}(id=${employee.id})}" class="btn btn-warning">Update</a>
-  <button class="btn btn-danger" th:onclick="'deleteEmployee(' + ${employee.id} + ')'">Delete</button>                            
-            </tbody>
+           <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.username}"></td>
+        <td th:text="${employee.role}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td>
+            <a th:href="@{/admin/editEmployee/{id}(id=${employee.id})}" class="btn btn-warning">Update</a>
+            <button class="btn btn-danger" th:onclick="'deleteEmployee(' + ${employee.id} + ')'">Delete</button>
+        </td>
+    </tr>
+</tbody>
         </table>
     </div>
 
-    <!-- نصوص برمجية للتفاعل مع الـ API -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function deleteEmployee(id) {
-            if (confirm("Are you sure you want to delete this employee?")) {
-                fetch(`/REST/admin/employees/delete/${id}`, { method: 'DELETE' })
-                    .then(response => {
-                        if (response.ok) location.reload();
-                    });
-            }
-        }
-    </script>
 </body>
 </html>
