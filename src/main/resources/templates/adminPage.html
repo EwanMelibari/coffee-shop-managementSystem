@@ -20,7 +20,6 @@
                     <th>Name</th>
                     <th>Role</th>
                     <th>Salary</th>
-                    <th>procedures</th>
                 </tr>
             </thead>
            <tbody>
@@ -32,6 +31,21 @@
         <td>
             <a th:href="@{/admin/editEmployee/{id}(id=${employee.id})}" class="btn btn-warning">Update</a>
             <button class="btn btn-danger" th:onclick="'deleteEmployee(' + ${employee.id} + ')'">Delete</button>
+       <script>
+    function deleteEmployee(id) {
+        if (confirm("Are you sure you want to delete this employee?")) {
+            fetch(`/REST/admin/employees/delete/${id}`, { 
+                method: 'DELETE' 
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // إعادة تحميل الصفحة بعد الحذف
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
         </td>
     </tr>
 </tbody>

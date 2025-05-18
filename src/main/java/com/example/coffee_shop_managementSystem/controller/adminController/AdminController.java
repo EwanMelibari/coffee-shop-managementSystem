@@ -32,12 +32,12 @@ public class AdminController {
 
     @GetMapping("/viewEmployees")
     public String viewEmployees(Model model) {
-        model.addAttribute("employees", manageEmployeeService.getAllEmployees());
+        model.addAttribute("employees", manageEmployeeService.getAllEmployees()); // استخدام "employees"
         return "adminPage";
     }
 
     @PostMapping("/employeesAdd")
-    public String addEmployee(@ModelAttribute("employee") User user) {
+    public String addEmployee(@ModelAttribute User user) {
         manageEmployeeService.saveEmployee(user);
         return "redirect:/admin/viewEmployees";
     }

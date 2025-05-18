@@ -36,12 +36,18 @@ public class User {
     @Min(value = 5000)
     private Double salary;
     
-    public User(String username, String password, PersonRole role, Double salary) {
+    public User(String username, PersonRole role,Double salary, String password) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.salary = salary;
     }
+
+    public User() {
+        // Constructor without parameters
+    }
+
+   
 
     public Integer getId() {
         return id;
